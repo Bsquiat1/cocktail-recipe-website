@@ -199,9 +199,7 @@ form.addEventListener('submit', (event) => {
       throw new Error('Form submission failed.');
     }
   })
-  .catch(error => {
-    alert(error.message);
-  });
+  
 });
 
 
