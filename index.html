@@ -1,12 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Wicked Cocktails</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<header>
+		<h1>WICKED COCKTAILS</h1>
+        <h3>Welcome to our cocktail website</h3>
+           
+		<nav>
+			<ul>
+				<li><a href="#about">About Us</a></li>
+				<li><a href="#cocktails">Cocktails</a></li>
+				<li><a href="#contact">Contact Us</a></li>
+                <li><a href="#random-cocktail">custom</a></li>
+			</ul> 
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Search cocktails...">
+                <button id="search-button">Search</button>
+              </div>
+              
+              
+		</nav>
+        
+          
+	</header>
+
+	<main>
+		<section id="about">
+			<h2>About Us</h2>
+			<p>Welcome to our cocktail site, your go-to destination for all things cocktail-related! Whether you're a seasoned bartender or a beginner looking to learn more about mixology, we've got you covered. Our site features a wide variety of cocktail recipes, from classic favorites like the Manhattan and the Margarita, to trendy new drinks like the Aperol Spritz and the Moscow Mule.
+                
+                In addition to our extensive recipe database, we also offer expert tips and tricks to help you improve your bartending skills. Learn how to mix the perfect drink, choose the right ingredients, and create your own signature cocktails.
+                
+                Looking to take your cocktail game to the next level? Check out our blog, where we discuss the latest cocktail trends, review new products, and share insider knowledge from top bartenders around the world.
+                
+                Thanks for visiting our cocktail site - cheers!</p>
+		</section>
+        
+        
+       <h2>Cocktails of the day</h2>
+		<div id="cocktails"></div>
+        <div id="random-cocktail">
+            <h2>Random Cocktail Generator</h2>
+            <button id="generate-cocktail-button">Generate Cocktail</button>
+            <div id="cocktail-details"></div>
+          </div>
+          
+
+
+		<section id="contact">
+			<h2>Contact Us</h2>
+            
+			<form action="submit-form.php" method="post">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name"><br>
+
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email"><br>
+
+				<label for="message">Message:</label>
+				<textarea id="message" name="message"></textarea><br>
+
+
+				<input type="submit" value="Submit">
+			</form>
+		</section>
+	</main>
+
+	<footer>
+		<p>Copyright © 2023 Cocktail Website</p>
+	</footer>
     <script src="index.js"></script>
 </body>
 </html>

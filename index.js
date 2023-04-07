@@ -1,1 +1,171 @@
-console.log('football app')
+fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
+  .then(response => response.json())
+  .then(data => {
+    const cocktails = data.drinks;
+    const cocktailsContainer = document.getElementById('cocktails');
+    
+    while (cocktailsContainer.firstChild) {
+      cocktailsContainer.removeChild(cocktailsContainer.firstChild);
+    }
+
+    const randomCocktails = [];
+    while (randomCocktails.length < 6) {
+      const randomIndex = Math.floor(Math.random() * cocktails.length);
+      const randomCocktail = cocktails[randomIndex];
+      if (!randomCocktails.includes(randomCocktail)) {
+        randomCocktails.push(randomCocktail);
+      }
+    }
+
+    randomCocktails.forEach(cocktail => {
+      const cocktailElement = document.createElement('div');
+      cocktailElement.classList.add('cocktail');
+      
+      const nameElement = document.createElement('h3');
+      nameElement.textContent = cocktail.strDrink;
+      cocktailElement.appendChild(nameElement);
+      
+      const imageElement = document.createElement('img');
+      imageElement.src = cocktail.strDrinkThumb;
+      cocktailElement.appendChild(imageElement);
+      
+      const ingredientsElement = document.createElement('ul');
+      for (let i = 1; i <= 15; i++) {
+        const ingredient = cocktail[`strIngredient${i}`];
+        const measure = cocktail[`strMeasure${i}`];
+        if (ingredient && measure) {
+          const ingredientElement = document.createElement('li');
+          ingredientElement.textContent = `${measure} ${ingredient}`;
+          ingredientsElement.appendChild(ingredientElement);
+        }
+      }
+      cocktailElement.appendChild(ingredientsElement);
+      
+      const instructionsElement = document.createElement('p');
+      instructionsElement.textContent = cocktail.strInstructions;
+      cocktailElement.appendChild(instructionsElement);
+      
+      cocktailsContainer.appendChild(cocktailElement);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching cocktails:', error);
+  });
+
+
+  
+  
+
+  const generateCocktailButton = document.querySelector('#generate-cocktail-button');
+const cocktailDetailsContainer = document.querySelector('#cocktail-details');
+
+generateCocktailButton.addEventListener('click', () => {
+  cocktailDetailsContainer.innerHTML = 'Generating cocktail...';
+
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+    .then(response => response.json())
+    .then(data => {
+      const cocktail = data.drinks[0];
+      const cocktailDetails = `
+        <h3>${cocktail.strDrink}</h3>
+        <img src="${cocktail.strDrinkThumb}">
+        <p><strong>Instructions:</strong> ${cocktail.strInstructions}</p>
+        <p><strong>Ingredients:</strong></p>
+        <ul>
+          ${getCocktailIngredientsList(cocktail)}
+        </ul>
+      `;
+      cocktailDetailsContainer.innerHTML = cocktailDetails;
+    })
+    .catch(error => {
+      console.error('Error generating cocktail:', error);
+      cocktailDetailsContainer.innerHTML = 'Error generating cocktail.';
+    });
+});
+
+function getCocktailIngredientsList(cocktail) {
+  let ingredientsList = '';
+  for (let i = 1; i <= 15; i++) {
+    const ingredient = cocktail['strIngredient' + i];
+    const measure = cocktail['strMeasure' + i];
+    if (ingredient && measure) {
+      ingredientsList += `<li>${measure} ${ingredient}</li>`;
+    } else if (ingredient) {
+      ingredientsList += `<li>${ingredient}</li>`;
+    }
+  }
+  return ingredientsList;
+}
+
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+
+searchButton.addEventListener('click', () => {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  if (searchQuery) {
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchQuery}`)
+      .then(response => response.json())
+      .then(data => {
+        const cocktails = data.drinks;
+        const cocktailsContainer = document.getElementById('cocktails');
+
+        while (cocktailsContainer.firstChild) {
+          cocktailsContainer.removeChild(cocktailsContainer.firstChild);
+        }
+
+        if (cocktails) {
+          cocktails.forEach(cocktail => {
+            const cocktailElement = createCocktailElement(cocktail);
+            cocktailsContainer.appendChild(cocktailElement);
+          });
+        } else {
+          const noResultsElement = document.createElement('p');
+          noResultsElement.textContent = 'No cocktails found.';
+          cocktailsContainer.appendChild(noResultsElement);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching cocktails:', error);
+      });
+  }
+});
+
+function createCocktailElement(cocktail) {
+  const cocktailElement = document.createElement('div');
+  cocktailElement.classList.add('cocktail');
+
+  const nameElement = document.createElement('h3');
+  nameElement.textContent = cocktail.strDrink;
+  cocktailElement.appendChild(nameElement);
+
+  const imageElement = document.createElement('img');
+  imageElement.src = cocktail.strDrinkThumb;
+  cocktailElement.appendChild(imageElement);
+
+  const ingredientsElement = document.createElement('ul');
+  for (let i = 1; i <= 15; i++) {
+    const ingredient = cocktail[`strIngredient${i}`];
+    const measure = cocktail[`strMeasure${i}`];
+    if (ingredient && measure) {
+      const ingredientElement = document.createElement('li');
+      ingredientElement.textContent = `${measure} ${ingredient}`;
+      ingredientsElement.appendChild(ingredientElement);
+    }
+  }
+  cocktailElement.appendChild(ingredientsElement);
+
+  const instructionsElement = document.createElement('p');
+  instructionsElement.textContent = cocktail.strInstructions;
+  cocktailElement.appendChild(instructionsElement);
+
+  return cocktailElement;
+}
+const form = document.querySelector('form');
+const submitBtn = document.querySelector('#submit-btn');
+
+submitBtn.addEventListener('click', (event) => {
+    event.preventDefault(); 
+   
+    
+    form.submit();
+});
