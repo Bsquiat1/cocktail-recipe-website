@@ -30,7 +30,7 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
       cocktailElement.appendChild(imageElement);
       
       const ingredientsElement = document.createElement('ul');
-      for (let i = 1; i <= 15; i++) {
+      for (let i = 1; i <= 1000; i++) {
         const ingredient = cocktail[`strIngredient${i}`];
         const measure = cocktail[`strMeasure${i}`];
         if (ingredient && measure) {
@@ -86,7 +86,7 @@ generateCocktailButton.addEventListener('click', () => {
 
 function getCocktailIngredientsList(cocktail) {
   let ingredientsList = '';
-  for (let i = 1; i <= 15; i++) {
+  for (let i = 1; i <= 1000; i++) {
     const ingredient = cocktail['strIngredient' + i];
     const measure = cocktail['strMeasure' + i];
     if (ingredient && measure) {
@@ -144,7 +144,7 @@ function createCocktailElement(cocktail) {
   cocktailElement.appendChild(imageElement);
 
   const ingredientsElement = document.createElement('ul');
-  for (let i = 1; i <= 15; i++) {
+  for (let i = 1; i <= 1000; i++) {
     const ingredient = cocktail[`strIngredient${i}`];
     const measure = cocktail[`strMeasure${i}`];
     if (ingredient && measure) {
