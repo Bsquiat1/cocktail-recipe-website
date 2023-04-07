@@ -79,10 +79,7 @@ generateCocktailButton.addEventListener('click', () => {
       `;
       cocktailDetailsContainer.innerHTML = cocktailDetails;
     })
-    .catch(error => {
-      console.error('Error generating cocktail:', error);
-      cocktailDetailsContainer.innerHTML = 'Error generating cocktail.';
-    });
+    
 });
 
 function getCocktailIngredientsList(cocktail) {
