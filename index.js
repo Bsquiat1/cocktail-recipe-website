@@ -126,9 +126,7 @@ searchButton.addEventListener('click', () => {
           cocktailsContainer.appendChild(noResultsElement);
         }
       })
-      .catch(error => {
-        console.error('Error fetching cocktails:', error);
-      });
+      
   }
 });
 
