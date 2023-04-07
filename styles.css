@@ -1,17 +1,17 @@
-/* Reset CSS */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body Styles */
+
 body {
     font-family: 'Roboto Mono', monospace;
     background-color: #f7f7f7;
 }
 
-/* Header Styles */
+
 header {
     background-image: url('https://images.unsplash.com/photo-1505826759037-406b40feb2a9');
     background-size: cover;

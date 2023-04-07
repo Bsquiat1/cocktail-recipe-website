@@ -46,6 +46,7 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
       cocktailElement.appendChild(instructionsElement);
       
       cocktailsContainer.appendChild(cocktailElement);
+      
     });
   })
   .catch(error => {
