@@ -20,3 +20,6 @@ This project is licensed under the MIT License. See the LICENSE file for more in
 
 Acknowledgments
 This project was inspired by TheCocktailDB and its vast collection of cocktail recipes. Special thanks to the developers who created and maintain the API.
+
+Author
+ Denis Were
