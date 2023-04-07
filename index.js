@@ -1,4 +1,5 @@
-fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
   .then(response => response.json())
   .then(data => {
     const cocktails = data.drinks;
@@ -162,11 +163,47 @@ function createCocktailElement(cocktail) {
   return cocktailElement;
 }
 const form = document.querySelector('form');
-const submitBtn = document.querySelector('#submit-btn');
 
-submitBtn.addEventListener('click', (event) => {
-    event.preventDefault(); 
-   
-    
-    form.submit();
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector('#name').value;
+  const email = document.querySelector('#email').value;
+  const message = document.querySelector('#message').value;
+
+ 
+  if (!name || !email || !message) {
+    alert('Please fill out all fields.');
+    return;
+  }
+
+  
+  const data = {
+    name: name,
+    email: email,
+    message: message
+  };
+
+  fetch('submit-form.php', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('Form submitted successfully!');
+      form.reset(); 
+    } else {
+      throw new Error('Form submission failed.');
+    }
+  })
+  .catch(error => {
+    alert(error.message);
+  });
 });
+
+
+});
+
